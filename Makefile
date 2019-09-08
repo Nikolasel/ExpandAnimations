@@ -5,7 +5,7 @@ VERSION=$(shell xmlstarlet sel -N oo="http://openoffice.org/extensions/descripti
 
 all: dist/$(EXTENSIONNAME)-$(VERSION).oxt
 
-dist/$(EXTENSIONNAME)-$(VERSION).oxt: $(shell find extension)
+dist/$(EXTENSIONNAME)-$(VERSION).oxt:
 	cd extension; zip -r ../$@ .
 	unopkg add --shared ../$@
 
