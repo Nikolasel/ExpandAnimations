@@ -7,7 +7,7 @@ all:
 	make extension/ExpandAnimations/ExpandAnimations.xba
 	cd extension; zip -r ../dist/$(EXTENSIONNAME)-$(VERSION).oxt .
 	echo yes | sudo unopkg add --verbose --shared dist/$(EXTENSIONNAME)-$(VERSION).oxt
-	xvfb-run libreoffice 'vnd.sun.star.script:ExpandAnimations.ExpandAnimations.test?language=Basic&location=application'
+	libreoffice 'vnd.sun.star.script:ExpandAnimations.ExpandAnimations.test?language=Basic&location=application'
 	pdftotext test/test-ExpandAnimations.pdf output.txt
 	diff test/test-ExpandAnimations.txt output.txt
 
