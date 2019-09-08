@@ -38,6 +38,7 @@ end sub
 ' can be called on the command line with
 ' $ libreoffice "macro:///ExpandAnimations.ExpandAnimations.test"
 ' $ libreoffice 'vnd.sun.star.script:ExpandAnimations.ExpandAnimations.test?language=Basic&location=application'
+' 
 sub test
   Dim Dummy()
   Url = "file:" + CurDir() + "test/test-ExpandAnimations.odp"
