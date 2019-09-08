@@ -1,6 +1,6 @@
 language: generic
 sudo: required
-dist: xenial
+dist: bionic
 services:
   - xvfb
 install: sudo apt-get install libreoffice xmlstarlet poppler-utils
