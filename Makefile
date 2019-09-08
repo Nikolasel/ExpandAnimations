@@ -6,7 +6,7 @@ VERSION=$(shell xmlstarlet sel -N oo="http://openoffice.org/extensions/descripti
 all:
 	make extension/ExpandAnimations/ExpandAnimations.xba
 	cd extension; zip -r ../dist/$(EXTENSIONNAME)-$(VERSION).oxt .
-	unopkg add --verbose ../dist/$(EXTENSIONNAME)-$(VERSION).oxt
+	unopkg add --verbose dist/$(EXTENSIONNAME)-$(VERSION).oxt
 
 extension/ExpandAnimations/ExpandAnimations.xba:
 	echo '<?xml version="1.0" encoding="UTF-8"?>' > $@
