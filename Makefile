@@ -1,4 +1,4 @@
-# Makefile for building LibreOffice/OpenOffice extensions
+# Makefile for building ExpandAnimations
 
 EXTENSIONNAME=ExpandAnimations
 VERSION=$(shell xmlstarlet sel -N oo="http://openoffice.org/extensions/description/2006" -t -v "//oo:version/@value" extension/description.xml)
