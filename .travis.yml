@@ -6,6 +6,6 @@ services:
 install: sudo apt-get install libreoffice xmlstarlet poppler-utils
 before_script:
   - "export DISPLAY=:99.0"
-  - service xvfb start
+  - sudo service xvfb start
   - sleep 3 # give xvfb some time to start
 script: make
