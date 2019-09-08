@@ -37,11 +37,17 @@ end sub
 ' tests the module on /tmp/test.odp
 ' can be called on the command line with
 ' $ libreoffice "macro:///ExpandAnimations.ExpandAnimations.test"
+' $ libreoffice 'vnd.sun.star.script:ExpandAnimations.ExpandAnimations.test?language=Basic&location=application'
 sub test
   Dim Dummy()
-  Url = "file:///home/martin/test-ExpandAnimations.odp"
-  StarDesktop.loadComponentFromURL(Url, "_default", 0, Dummy)
-  Main
+  Url = "file:" + CurDir() + "/test-ExpandAnimations.odp"
+  Dim FileProperties(1) As New com.sun.star.beans.PropertyValue
+  FileProperties(0).Name = "Hidden"
+  FileProperties(0).Value =true
+  doc=StarDesktop.loadComponentFromURL(Url, "_default", 0,  FileProperties())
+  expandAnimations(doc)
+  doc.close(True)
+  starDesktop.terminate()
 end sub
 
 ' expands the animations and exports to PDF
