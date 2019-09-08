@@ -40,7 +40,7 @@ end sub
 ' $ libreoffice 'vnd.sun.star.script:ExpandAnimations.ExpandAnimations.test?language=Basic&location=application'
 sub test
   Dim Dummy()
-  Url = "file:" + CurDir() + "/test-ExpandAnimations.odp"
+  Url = "file:" + CurDir() + "test/test-ExpandAnimations.odp"
   Dim FileProperties(1) As New com.sun.star.beans.PropertyValue
   FileProperties(0).Name = "Hidden"
   FileProperties(0).Value =true

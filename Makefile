@@ -6,7 +6,7 @@ VERSION=$(shell xmlstarlet sel -N oo="http://openoffice.org/extensions/descripti
 all:
 	make extension/ExpandAnimations/ExpandAnimations.xba
 	cd extension; zip -r ../dist/$(EXTENSIONNAME)-$(VERSION).oxt .
-	echo yes | unopkg add --shared --verbose dist/$(EXTENSIONNAME)-$(VERSION).oxt
+	echo yes | sudo unopkg add --verbose dist/$(EXTENSIONNAME)-$(VERSION).oxt
 	xvfb-run libreoffice 'vnd.sun.star.script:ExpandAnimations.ExpandAnimations.test?language=Basic&location=application'
 
 extension/ExpandAnimations/ExpandAnimations.xba:
