@@ -6,9 +6,9 @@ VERSION=$(shell xmlstarlet sel -N oo="http://openoffice.org/extensions/descripti
 all:
 	make extension/ExpandAnimations/ExpandAnimations.xba
 	cd extension; zip -r ../dist/$(EXTENSIONNAME)-$(VERSION).oxt .
-	unopkg add ../dist/$(EXTENSIONNAME)-$(VERSION).oxt
+	unopkg --verbose add ../dist/$(EXTENSIONNAME)-$(VERSION).oxt
 
-extension/ExpandAnimations/ExpandAnimations.xba: src/ExpandAnimations.bas
+extension/ExpandAnimations/ExpandAnimations.xba:
 	echo '<?xml version="1.0" encoding="UTF-8"?>' > $@
 	echo '<!DOCTYPE script:module PUBLIC "-//OpenOffice.org//DTD OfficeDocument 1.0//EN" "module.dtd">' >> $@
 	echo '<script:module xmlns:script="http://openoffice.org/2000/script" script:name="ExpandAnimations" script:language="StarBasic">' >> $@
