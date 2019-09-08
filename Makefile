@@ -4,8 +4,9 @@ EXTENSIONNAME=ExpandAnimations
 VERSION=$(shell xmlstarlet sel -N oo="http://openoffice.org/extensions/description/2006" -t -v "//oo:version/@value" extension/description.xml)
 
 all:
+	make extension/ExpandAnimations/ExpandAnimations.xba
 	cd extension; zip -r ../dist/$(EXTENSIONNAME)-$(VERSION).oxt .
-	unopkg add --shared ../dist/$(EXTENSIONNAME)-$(VERSION).oxt
+	unopkg add ../dist/$(EXTENSIONNAME)-$(VERSION).oxt
 
 extension/ExpandAnimations/ExpandAnimations.xba: src/ExpandAnimations.bas
 	echo '<?xml version="1.0" encoding="UTF-8"?>' > $@
