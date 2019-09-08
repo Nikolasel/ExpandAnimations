@@ -7,6 +7,7 @@ all: dist/$(EXTENSIONNAME)-$(VERSION).oxt
 
 dist/$(EXTENSIONNAME)-$(VERSION).oxt: $(shell find extension)
 	cd extension; zip -r ../$@ .
+	unopkg add --shared ../$@
 
 extension/ExpandAnimations/ExpandAnimations.xba: src/ExpandAnimations.bas
 	echo '<?xml version="1.0" encoding="UTF-8"?>' > $@
