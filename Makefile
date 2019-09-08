@@ -15,6 +15,6 @@ extension/ExpandAnimations/ExpandAnimations.xba:
 	echo '<?xml version="1.0" encoding="UTF-8"?>' > $@
 	echo '<!DOCTYPE script:module PUBLIC "-//OpenOffice.org//DTD OfficeDocument 1.0//EN" "module.dtd">' >> $@
 	echo '<script:module xmlns:script="http://openoffice.org/2000/script" script:name="ExpandAnimations" script:language="StarBasic">' >> $@
-	perl -MHTML::Entities -ne 'print encode_entities($$_)' $^ >> $@
+	perl -MHTML::Entities -ne 'print encode_entities($$_)' src/ExpandAnimations.bas >> $@
 	echo '</script:module>' >> $@
 
