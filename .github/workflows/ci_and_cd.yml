@@ -20,7 +20,7 @@ jobs:
 
 
   cd:
-    if: github.event_name == 'push' && github.ref == 'master'
+    #if: github.event_name == 'push' && github.ref == 'master'
 
     needs: ci
 
