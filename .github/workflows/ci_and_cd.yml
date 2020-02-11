@@ -25,8 +25,6 @@ jobs:
     needs: ci
 
     runs-on: ubuntu-latest
-
-    shell: bash
     
     steps:
     - uses: actions/checkout@v1
@@ -36,10 +34,13 @@ jobs:
       run: make 
     - name: Estimate current Version
       run: VERSION=`xmlstarlet sel -N oo="http://openoffice.org/extensions/description/2006" -t -v "//oo:version/@value" extension/description.xml`
+      shell: bash
     - name: Generate Git Tag
       run: git tag $VERSION
+      shell: bash
     - name: Create GitHub Releases
       id: create_release
+      shell: bash
       uses: actions/create-release@v1
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions
@@ -55,6 +56,7 @@ jobs:
         prerelease: false
     - name: Post Extension to GitHub Releases
       id: upload-release-asset 
+      shell: bash
       uses: actions/upload-release-asset@v1
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -65,6 +67,7 @@ jobs:
         asset_content_type: application/zip      
     - name: Increase Version
       run: ./increase-version.sh
+      shell: bash
     - name: Commit Git Changes 
       run: |
         git add extension/description.xml
