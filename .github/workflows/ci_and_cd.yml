@@ -1,12 +1,27 @@
-name: CD
+name: CI and CD
 
-on:
-  push:
-    branches:
-      - master # Only on push to master branch
+on: [push, pull_request]
 
 jobs:
+  ci:
+
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v1
+    - name: Install LibreOffice
+      run: sudo apt-get install libreoffice-impress xmlstarlet poppler-utils
+    - name: Build Extension
+      run: make
+    - name: Install Extension
+      run: make install  
+    - name: Test Extension
+      run: make test
+
+
   cd:
+    if: github.event_name == 'push' && github.ref == 'master'
+
     needs: ci
 
     runs-on: ubuntu-latest
