@@ -40,7 +40,6 @@ jobs:
       shell: bash
     - name: Create GitHub Releases
       id: create_release
-      shell: bash
       uses: actions/create-release@v1
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions
@@ -56,7 +55,6 @@ jobs:
         prerelease: false
     - name: Post Extension to GitHub Releases
       id: upload-release-asset 
-      shell: bash
       uses: actions/upload-release-asset@v1
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
