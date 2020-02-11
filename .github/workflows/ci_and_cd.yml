@@ -35,6 +35,8 @@ jobs:
       run: sudo apt-get install xmlstarlet
     - name: Build Extension
       run: make
+    - name: Show determined Version
+      run: echo ${VERSION}   
     - name: Generate Git Tag
       run: git tag ${VERSION}
     - name: Create GitHub Releases
