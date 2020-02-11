@@ -1,0 +1,52 @@
+name: CD
+
+on:
+  push:
+    branches:
+      - master # Only on push to master branch
+
+jobs:
+  cd:
+    needs: ci
+
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Estimate current Version
+      run: VERSION=`xmlstarlet sel -N oo="http://openoffice.org/extensions/description/2006" -t -v "//oo:version/@value" extension/description.xml`
+    - name: Generate Git Tag
+      run: git tag $VERSION
+    - name: Create GitHub Releases
+      id: create_release
+      uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions
+        with:
+          tag_name: $VERSION
+          release_name: Release $VERSION
+          # Uncomment if some release notes are available
+          #body: |
+          #  Changes in this Release
+          #  - First Change
+          #  - Second Change
+          draft: false
+          prerelease: false
+    - name: Post Extension to GitHub Releases
+      id: upload-release-asset 
+      uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
+          asset_path: ./dist/ExpandAnimations-$VERSION.oxt
+          asset_name: ExpandAnimations-$VERSION.oxt
+          asset_content_type: application/zip      
+    - name: Increase Version
+      run: ./increase-version.sh
+    - name: Commit Git Changes 
+      run: |
+        git add extension/description.xml
+        git commit -m "Extension version updated"
+        git push --all
+
+          
