@@ -25,6 +25,8 @@ jobs:
     needs: ci
 
     runs-on: ubuntu-latest
+
+    shell: bash
     
     steps:
     - uses: actions/checkout@v1
