@@ -26,25 +26,20 @@ jobs:
 
     runs-on: ubuntu-latest
 
-    env:
-      VERSION: 0.7 # Currently can't be fetched automatically
-
     steps:
     - uses: actions/checkout@v1
     - name: Install Dependencies
       run: sudo apt-get install xmlstarlet
     - name: Build Extension
       run: make
-    - name: Show determined Version
-      run: echo ${VERSION}
     - name: Create GitHub Releases
       id: create_release
       uses: actions/create-release@v1
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions
       with:
-        tag_name: ${VERSION}
-        release_name: Release ${VERSION}
+        tag_name: 0.7
+        release_name: Release 0.7
         # Uncomment if some release notes are available
         #body: |
         #  Changes in this Release
@@ -59,8 +54,8 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
-        asset_path: ./dist/ExpandAnimations-${VERSION}.oxt
-        asset_name: ExpandAnimations-${VERSION}.oxt
+        asset_path: ./dist/ExpandAnimations-0.7.oxt
+        asset_name: ExpandAnimations-0.7.oxt
         asset_content_type: application/zip      
     - name: Increase Version
       run: ./increase-version.sh
