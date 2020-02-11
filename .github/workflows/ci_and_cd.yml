@@ -25,17 +25,16 @@ jobs:
     needs: ci
 
     runs-on: ubuntu-latest
-    
+
+    env:
+      VERSION: $(xmlstarlet sel -N oo="http://openoffice.org/extensions/description/2006" -t -v "//oo:version/@value" extension/description.xml)
+
     steps:
     - uses: actions/checkout@v1
     - name: Install Dependencies
       run: sudo apt-get install xmlstarlet
     - name: Build Extension
-      run: make 
-    - name: Determine Version
-      uses: allenevans/set-env@v1.0.0
-      with:
-        VERSION: $(xmlstarlet sel -N oo="http://openoffice.org/extensions/description/2006" -t -v "//oo:version/@value" extension/description.xml)
+      run: make
     - name: Generate Git Tag
       run: git tag ${VERSION}
     - name: Create GitHub Releases
