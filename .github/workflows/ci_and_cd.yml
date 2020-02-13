@@ -20,13 +20,12 @@ jobs:
 
 
   cd:
-    #if: github.event_name == 'push' && endsWith(github.ref, '/master')
+    if: github.event_name == 'push' && endsWith(github.ref, '/master')
 
     needs: ci
 
     runs-on: ubuntu-latest
 
-    #TODO bot cannot change workflow
     #TODO 0.10 is 0.1 in github
 
     steps:
@@ -39,9 +38,6 @@ jobs:
       run: |
           version=`xmlstarlet sel -N oo="http://openoffice.org/extensions/description/2006" -t -v "//oo:version/@value" extension/description.xml`
           echo ::set-env name=VERSION::$version
-    - name: Check Version
-      run:
-        echo ${VERSION}
     - name: Create GitHub Releases
       id: create_release
       uses: actions/create-release@v1
