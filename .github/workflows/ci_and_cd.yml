@@ -48,8 +48,8 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions
       with:
-        tag_name: ${{ VERSION }}
-        release_name: Release ${{ VERSION }}
+        tag_name: ${{ env.VERSION }}
+        release_name: Release ${{ env.VERSION }}
         # Uncomment if some release notes are available
         #body: |
         #  Changes in this Release
@@ -64,8 +64,8 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
-        asset_path: ./dist/ExpandAnimations-${{ VERSION }}.oxt
-        asset_name: ExpandAnimations-${{ VERSION }}.oxt
+        asset_path: ./dist/ExpandAnimations-${{ env.VERSION }}.oxt
+        asset_name: ExpandAnimations-${{ env.VERSION }}.oxt
         asset_content_type: application/zip      
     - name: Increase Version
       run: ./increase-version.sh
