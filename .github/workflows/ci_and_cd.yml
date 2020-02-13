@@ -26,8 +26,6 @@ jobs:
 
     runs-on: ubuntu-latest
 
-    #TODO 0.10 is 0.1 in github
-
     steps:
     - uses: actions/checkout@v1
     - name: Install Dependencies
