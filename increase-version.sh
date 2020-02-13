@@ -8,4 +8,3 @@ echo "Current major version: "$MAJOR_VERSION
 echo "Current minor version: "$MINOR_VERSION
 echo "New version: "$NEW_VERSION
 xmlstarlet ed --inplace -N oo="http://openoffice.org/extensions/description/2006" -u "//oo:version/@value" -v $NEW_VERSION extension/description.xml
-sed -i s/${CURRENT_VERSION}/${NEW_VERSION}/g .github/workflows/ci_and_cd.yml
